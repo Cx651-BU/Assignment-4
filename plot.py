@@ -49,8 +49,8 @@ def extract_run_id(filename):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print(f"Usage: {sys.argv[0]} <results_folder>")
+    if len(sys.argv) != 3:
+        print(f"Usage: {sys.argv[0]} <results_folder> <output image path>")
         sys.exit(1)
 
     out_files = sorted(Path(sys.argv[1]).glob("mm-*.out"))
@@ -107,7 +107,7 @@ def main():
 
     plt.title("Execution Time and CPU Usage per Run")
     plt.tight_layout()
-    plt.show()
+    plt.savefig(sys.argv[2])
 
 
 if __name__ == "__main__":

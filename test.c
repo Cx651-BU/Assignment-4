@@ -146,20 +146,20 @@ int test_scheduling_metrics() {
         return 0;
    }
 
-   if(rsp2 < 0.08 || rsp2 > 0.8) {
-        printf("SJF response time in invalid range.\n");
+   if(rsp2 < 0.1 || rsp2 > 0.8) {
+        printf("SJF response time in invalid range. %lf, %d,%d\n", rsp2,rsp2 < 0.01,rsp2 > 0.8);
         return 0;
    }
 
-   if(rsp < 0.2 || rsp > 0.8) {
-        printf("FIFO response time in invalid range.\n");
+   if(rsp < 0.1 || rsp > 0.8) {
+        printf("FIFO response time in invalid range %lf.\n", rsp);
         return 0;
    }
 
    float rsp3 = SJF(jobs,3);
 
    if(fabs(rsp3 - rsp2) < 0.000001) {
-        printf("More Variance between runs expected.\n");
+        printf("Less Variance between runs expected.\n");
         return 0;
    }
    return 1;

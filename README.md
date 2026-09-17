@@ -17,10 +17,12 @@ The C program should take in command line arguments as follows.
 Usage: ./matrix <rows1> <cols1> <cols2> <run forever? 0/1>
 ```
 
-Your matrix multiplication program should implement two functions:
+Your matrix multiplication program should implement four functions:
 
 - `generate_matrix(int nrows, int ncols)` which generates a nrows x ncols matrix filled with random values using `rand()`.
-- `int ** matrix_multiply(int ** A, int **B)` which generates a new output matrix by performing a matrix multiply between input matrix A and B.
+- `multiply_matrices(int rows1, int cols1, int *matrix1, int rows2, int cols2, int *matrix2, int *result)` which generates a new output matrix by performing a matrix multiply between input matrix A and B.
+- `void display_matrix(int rows, int cols, int *matrix)` prints the matrix to STDOUT for debugging purposes. 
+- `int do_job(int rows1, int cols1, int cols2, int forever)` the main "engine" of the program. It should generate matrices of the specified size, multiply them, either one time if forever =0, or in a loop if forever=1.
 
 ```shell
 $ ./matrix 100 100 100 0
@@ -38,7 +40,7 @@ Thu May 21 11:22:53 2026 100x100 matrices: 0.003189 seconds
 You will now run a small experiment on the execution time of your matrix multiplication program.
 
 > [!IMPORTANT]
-> **TASK:** Add the ability to run a timed matrix multiplication job. This job should randomly generate two NxN matrices and time the output.
+> **TASK:** Add the ability to run a timed matrix multiplication job. This job should randomly generate two NxN matrices and time the how long the multiplication takes.
 
 Your timing output must include output that follows the EXACT format below:
 ```
@@ -65,16 +67,22 @@ float total_time = dns+ds;
 
 ```
 
-
-
 You have been provided with bash script `bench-single.sh` which creates a small loop to invoke your matrix multiplication program on various size matrices and save the output in a file with redirection: `> data/EXPERIMENT_NAME/mm-i.out`.
 
 It also saves the CPU percentage in a file as well: `> data/EXPERIMENT_NAME/mm-i-cpu.out`
 
 Finally, you may use the provided `plot.py` to create a graph of your results.
 
- > [!IMPORTANT]
-> **TASK:** CRun the bash testing script and python plotting programs. Inspect the result of the experiment, comparing the execution time and CPU usage percent of matrix multiplications ranging from 100x100 to 1000x1000. Save testing result output files in directory `data/bench-single`. Save these file as `single-plot.png` for each size.
+To run the plotting script, use the following command:
+```
+python3 plot.py <results_folder> <output image path>
+```
+
+`results_folder` should match the corresponding experiment and be in the form: `data/EXPERIMENT_NAME`.
+
+> [!IMPORTANT]
+> **TASK:** Time and run matrix multiplication tests!
+> - Run the bash testing script and python plotting programs. Inspect the result of the experiment, comparing the execution time and CPU usage percent of matrix multiplications ranging from 100x100 to 1000x1000. Save testing result output files in directory `data/bench-single`. Save these file as `plot-single.png` for each size.
 
 
 ## Part 3: Varying the Number of Processes
@@ -86,7 +94,8 @@ Your output plot for a single run of bench-multi.sh and plot.py should resemble 
 <img src = "Figure_1.png"/>
 
 > [!IMPORTANT]
-> **TASK:** Create a python plotting program and bash tester script that times the matrix multiplication and CPU usage percentage with 10 concurrently running matrix multiplications. Run this experiment with 500x500 sized matrices. Save this file as `plot-multi.png`.
+> **TASK:** Use the provided python plotting program `plot.py` and bash tester script `bench-multi.sh` that times the matrix multiplication and CPU usage percentage with 10 concurrently running matrix multiplications. Run this experiment with 500x500 sized matrices. Save this file as `plot-multi.png`.
+> - In `questions.txt` answer the following question: What do you notice about the output compared to `plot-single.png`? Label your answer `(1)`.
 
 ## Part 3: Varying the CPU Resource
 
@@ -100,6 +109,7 @@ Forces the 100x100 matrix multiplication to run on CPU 0.
 
 > [!IMPORTANT]
 > **TASK:** Modify the bash tester script, creating `bench-taskset.sh`, such that the different processes are all scheduled on the same CPU. Plot the time the matrix multiplication and CPU usage percentage as the number of processes increases. `plot-taskset.png`
+> - In `questions.txt` answer the following question: What do you notice about the output compared to `plot-multi.png`? Label your answer `(2)`.
 
 ## Part 4: Varying the Scheduling Priorities
 
@@ -113,7 +123,8 @@ nice -n 10 ./bench 100 100 100 0
 Schedules a 100x100 matrix multiplication with "niceness" 10. Niceness ranges from -20 to 19 with the default being 0. A process that is "nicer" will step aside and allow other "less nice" processes to run more frequently.
 
 > [!IMPORTANT]
-> **TASK:** Modify your bash tester script, creating `bench-nice.sh`, to schedule some matrix multiplication tasks as low-priority (high niceness) and some as high-priority (low niceness). Save this plot as `plot-nice.png`.
+> **TASK:** Modify your bash tester script, creating `bench-nice.sh`, to schedule some matrix multiplication tasks as low-priority (high niceness) and some as high-priority (low niceness). Save this plot as `plot-nice.png`. 
+> - In `questions.txt` answer the following question: What do you notice about the output compared to `plot-multi.png`? Label your answer `(3)`.
 
 
 ## Part 5: Interactive Job Dispatching
@@ -143,6 +154,15 @@ You should do the necessary bookkeeping to report throughput and average respons
 > **TASK:** Create `interactive.c` which allows users to input in new job requests via the command line. Implement a simple shortest-job-first scheduling policy in your interactive matrix multiplication program.
 
 At this point you should pass all tests `source test.sh`.
-Make sure to submit your work to Gradescope!
 
+## Submitting on Gradescope
 
+To submit on Gradescope, submit all the files in this directory to the assignment upload.
+
+You do not need to upload the `data/` subdirectory.
+
+**DO NOT upload a zip.** Use Shift to select all the files in your assignment directory instead.
+
+Note: To download files from google colab, navigate to the `Assignment-4` directory that should be saved in your **Google Drive**. (Assuming you did all your work in `/content/drive/MyDrive/Assignment-4`). Clicking the three vertical dots shows a "download" option that will download all files to your local computer for upload to gradescope.
+
+You should see the autograder run and report a score. Ensure that you are happy with this score! Feel free to resubmit as many times as you wish before the deadline.
