@@ -82,7 +82,9 @@ python3 plot.py <results_folder> <output image path>
 
 > [!IMPORTANT]
 > **TASK:** Time and run matrix multiplication tests!
-> - Run the bash testing script and python plotting programs. Inspect the result of the experiment, comparing the execution time and CPU usage percent of matrix multiplications ranging from 100x100 to 1000x1000. Save testing result output files in directory `data/bench-single`. Save these file as `plot-single.png` for each size.
+> - Run the bash testing script and python plotting programs. Inspect the result of the experiment, comparing the execution time and CPU usage percent of matrix multiplications ranging from 100x100 to 1000x1000. 
+> - Save testing result output files in directory `data/bench-single`. Save these file as `plot-single.png` for each size.
+> - Note: Depending on your physical machine, this test may take a long time to run. If it is taking FAR too long, change the sizes that `bench-single.sh` is using to attempt smaller matrix multiplications instead.
 
 
 ## Part 3: Varying the Number of Processes
@@ -96,6 +98,7 @@ Your output plot for a single run of bench-multi.sh and plot.py should resemble 
 > [!IMPORTANT]
 > **TASK:** Use the provided python plotting program `plot.py` and bash tester script `bench-multi.sh` that times the matrix multiplication and CPU usage percentage with 10 concurrently running matrix multiplications. Run this experiment with 500x500 sized matrices. Save this file as `plot-multi.png`.
 > - In `questions.txt` answer the following question: What do you notice about the output compared to `plot-single.png`? Label your answer `(1)`.
+> - Note: Depending on your physical machine, this test may take a long time to run. If it is taking FAR too long, change the sizes/number of processes that `bench-multi.sh` is using to attempt smaller matrix multiplications instead.
 
 ## Part 3: Varying the CPU Resource
 
@@ -110,6 +113,7 @@ Forces the 100x100 matrix multiplication to run on CPU 0.
 > [!IMPORTANT]
 > **TASK:** Modify the bash tester script, creating `bench-taskset.sh`, such that the different processes are all scheduled on the same CPU. Plot the time the matrix multiplication and CPU usage percentage as the number of processes increases. `plot-taskset.png`
 > - In `questions.txt` answer the following question: What do you notice about the output compared to `plot-multi.png`? Label your answer `(2)`.
+> - Note: Depending on your physical machine, this test may take a long time to run. If it is taking FAR too long, change the sizes/number of processes that `bench-taskset.sh` is using to attempt smaller matrix multiplications instead.
 
 ## Part 4: Varying the Scheduling Priorities
 
@@ -125,6 +129,7 @@ Schedules a 100x100 matrix multiplication with "niceness" 10. Niceness ranges fr
 > [!IMPORTANT]
 > **TASK:** Modify your bash tester script, creating `bench-nice.sh`, to schedule some matrix multiplication tasks as low-priority (high niceness) and some as high-priority (low niceness). Save this plot as `plot-nice.png`. 
 > - In `questions.txt` answer the following question: What do you notice about the output compared to `plot-multi.png`? Label your answer `(3)`.
+> - Note: Depending on your physical machine, this test may take a long time to run. If it is taking FAR too long, change the sizes/number of processes that `bench-nice.sh` is using to attempt smaller matrix multiplications instead.
 
 
 ## Part 5: Interactive Job Dispatching
