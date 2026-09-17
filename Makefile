@@ -1,12 +1,10 @@
-all: matrix
+all: bench interactive test
 
 CC=gcc
 CFLAGS=-I. -lm
 
 %.o: %.c 
 	$(CC) -c -o $@ $< $(CFLAGS)
-
-all: bench interactive test
 
 bench: bench.o matrix.o
 	$(CC) -o $@ $^ $(CFLAGS)
@@ -22,3 +20,4 @@ clean:
 	rm -f matrix
 	rm -f interactive
 	rm -f test
+	rm -f bench
