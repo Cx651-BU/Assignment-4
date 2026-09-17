@@ -55,11 +55,12 @@ fi
 
 for (( i = 2; i < 5; i++ )); do
     echo "TEST: ./test $i"
-    ./test $i > /dev/null
+    output=$(./test $i)
     if [ "$?" -eq 1 ]; then
     ((score+=1))
     else
     echo "  --FAIL!"
+    echo "$output"
     fi
 done
 
@@ -80,4 +81,4 @@ else
     echo "  --FAIL!"
 fi
 
-echo "SCORE: $score/9"
+echo "SCORE: $score/10"

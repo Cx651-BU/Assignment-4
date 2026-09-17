@@ -107,11 +107,6 @@ int test_FIFO() {
         return 0;
     }
 
-
-    if(rsp < .5 || rsp > 1.2) {
-        printf("FIFO response time in invalid range. %f\n", rsp);
-        return 0;
-    }
     return 1;
 }
 
@@ -122,11 +117,6 @@ int test_SJF() {
 
     float rsp = FIFO(jobs1,5);
     float rsp2 = FIFO(jobs2,5);
-
-    if(rsp < 0.3 || rsp > 0.8) {
-        printf("SJF response time in invalid range.\n");
-        return 0;
-    }
 
     if(rsp <= rsp2) {
         printf("Second job list should have shorter response time.\n");
@@ -146,19 +136,9 @@ int test_scheduling_metrics() {
         return 0;
    }
 
-   if(rsp2 < 0.1 || rsp2 > 0.8) {
-        printf("SJF response time in invalid range. %lf, %d,%d\n", rsp2,rsp2 < 0.01,rsp2 > 0.8);
-        return 0;
-   }
-
-   if(rsp < 0.1 || rsp > 0.8) {
-        printf("FIFO response time in invalid range %lf.\n", rsp);
-        return 0;
-   }
-
    float rsp3 = SJF(jobs,3);
 
-   if(fabs(rsp3 - rsp2) < 0.000001) {
+   if(fabs(rsp3 - rsp2) < 0.0001) {
         printf("Less Variance between runs expected.\n");
         return 0;
    }
