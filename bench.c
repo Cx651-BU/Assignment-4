@@ -24,6 +24,12 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    do_job(rows1, cols1,cols2, run_);
+    float elapsed = do_job(rows1, cols1, cols2, forever);
+
+    if (!forever) {
+        printf("%dx%d matrices: %.6f seconds\n",
+               rows1, cols1, elapsed);
+    }
+    
     return 0;
 }
