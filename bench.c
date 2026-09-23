@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     int cols1 = atoi(argv[2]);
     int cols2 = atoi(argv[3]);
 
-    int run_ = atoi(argv[4]);
+    int forever = atoi(argv[4]);
 
 
     // Check if dimensions are valid for matrix multiplication
