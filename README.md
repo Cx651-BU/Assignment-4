@@ -14,18 +14,18 @@ $$c_{ij} = a_{i1} b_{1j} + a_{i2} b_{2j} + \cdots + a_{in} b_{nj} = \sum_{k=1}^n
 
 The C program should take in command line arguments as follows.
 ```
-Usage: ./matrix <rows1> <cols1> <cols2> <run forever? 0/1>
+Usage: ./bench <rows1> <cols1> <cols2> <run forever? 0/1>
 ```
 
 Your matrix multiplication program should implement four functions:
 
-- `generate_matrix(int nrows, int ncols)` which generates a nrows x ncols matrix filled with random values using `rand()`.
-- `multiply_matrices(int rows1, int cols1, int *matrix1, int rows2, int cols2, int *matrix2, int *result)` which generates a new output matrix by performing a matrix multiply between input matrix A and B.
+- `void generate_random_matrix(int nrows, int ncols)` which generates a nrows x ncols matrix filled with random values using `rand()`.
+- `void multiply_matrices(int rows1, int cols1, int *matrix1, int rows2, int cols2, int *matrix2, int *result)` which generates a new output matrix by performing a matrix multiply between input matrix A and B.
 - `void display_matrix(int rows, int cols, int *matrix)` prints the matrix to STDOUT for debugging purposes. 
-- `int do_job(int rows1, int cols1, int cols2, int forever)` the main "engine" of the program. It should generate matrices of the specified size, multiply them, either one time if forever =0, or in a loop if forever=1.
+- `float do_job(int rows1, int cols1, int cols2, int forever)` the main "engine" of the program. It should generate matrices of the specified size, multiply them, either one time if forever =0, or in a loop if forever=1.
 
 ```shell
-$ ./matrix 100 100 100 0
+$ ./bench 100 100 100 0
 Generating Matrices...Matrix 1 done.
 Matrix 2 done.
 Thu May 21 11:22:53 2026 100x100 matrices: 0.003189 seconds
