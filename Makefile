@@ -17,7 +17,6 @@ test: test.o scheduler.o matrix.o
 
 clean:
 	rm -f *.o
-	rm -f matrix
 	rm -f interactive
 	rm -f test
 	rm -f bench
