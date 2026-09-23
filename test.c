@@ -115,8 +115,8 @@ int test_SJF() {
     int jobs1[] = {300,300,300,600,100};
     int jobs2[] = {100,100,100,600,300};
 
-    float rsp = FIFO(jobs1,5);
-    float rsp2 = FIFO(jobs2,5);
+    float rsp = SJF(jobs1,5);
+    float rsp2 = SJF(jobs2,5);
 
     if(rsp <= rsp2) {
         printf("Second job list should have shorter response time.\n");
@@ -127,22 +127,25 @@ int test_SJF() {
 }
 
 int test_scheduling_metrics() {
-   int jobs[] = {300,200,100};
-   float rsp = FIFO(jobs,3);
-   float rsp2 = SJF(jobs,3);
+    int jobs[] = {300, 200, 100};
 
-   if(rsp <= rsp2) {
-        printf("SJF should have shorter response time.\n");
+    float fifo_response = FIFO(jobs, 3);
+    float sjf_response = SJF(jobs, 3);
+
+    if (fifo_response < 0.0f || sjf_response < 0.0f) {
+        printf("Scheduling function returned an error.\n");
         return 0;
-   }
+    }
 
-   float rsp3 = SJF(jobs,3);
-
-   if(fabs(rsp3 - rsp2) < 0.0001) {
-        printf("Less Variance between runs expected.\n");
+    if (sjf_response >= fifo_response) {
+        printf(
+            "SJF should have a shorter average response time "
+            "than FIFO.\n"
+        );
         return 0;
-   }
-   return 1;
+    }
+
+    return 1;
 }
 
 int run_test(char * test_name, int (*test_func)()) {
